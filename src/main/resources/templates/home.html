@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+    <title>Home page</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+</head>
+<body>
+<header th:insert="~{fragments/navbar :: navbar}"> </header>
+
+<h2>Главная страница</h2>
+<div th:insert="~{fragments/notification :: notification}"></div>
+<div sec:authorize="isAuthenticated()">
+    <script src="../static/scripts/index.js" th:href="@{../static/scripts/index.js}"></script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/myLotsStyles.css" th:href="@{../static/styles/myLotsStyles.css}">
+    <link rel="stylesheet" href="../static/styles/notificationStyles.css"
+          th:href="@{../static/styles/notificationStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div class="pane">
+    <div class="upper">
+        Страница администратора
+    </div>
+    <div class="content-mylots">
+
+        <div th:each="i : ${lots}">
+            <div class="item">
+                <div class="photo">
+                    <img th:class="${i.getPhoto() != 0} ? images" th:src="@{/api/photo/{name} (name= ${i.photo})}"
+                         src="#">
+                </div>
+                <div class="info">
+                    <a href="#" th:href="@{/lot/{id} (id=${i.getId()})}">
+                        <div class="desc" th:text="${i.getName()}">
+                        </div>
+                    </a>
+                    <div class="buttons" sec:authorize="isAuthenticated()">
+                        <div>
+                            <button th:id="'button' + ${i.getId()}" style="border-radius: 0 0 0 10px" th:onclick="|deleteLot(${i.getId()})|" class="unsub">
+                                Удалить
+                            </button>
+                        </div>
+                        <div>
+                            <button th:id="'buttonc' + ${i.getId()}"  style=" border-radius: 0 0 10px 0" th:onclick="|closeAdminLot(${i.getId()})|" class="unsub">
+                                Закрыть
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pages">
+            <div th:each="i : ${pageNumbers}">
+                <a href="#" th:href="@{/admin(page=${i})}">
+                    <div th:class="${i==currentPage} ? current" th:text="${i}"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div sec:authorize="isAuthenticated()">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="../static/scripts/subLogic.js" th:href="@{../static/scripts/subLogic.js}"></script>
+    <script src="../static/scripts/admin.js" th:href="@{../static/scripts/admin.js}"></script>
+    <script src="../static/scripts/listenNotification.js"
+            th:href="@{../static/scripts/listenNotification.js}"></script>
+</div>
+
+</body>
+</html>

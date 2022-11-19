@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/notificationStyles.css" th:href="@{../static/styles/notificationStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"> </div>
+<div class="pane">
+    <div class="upper">
+        Профиль
+    </div>
+    <div class="content-profile">
+        <a href="#" th:href="@{/profile/mylots}">
+        <div class="cell">
+            Мои лоты
+        </div>
+        </a>
+        <a href="#" th:href="@{/profile/add}">
+            <div class="cell">
+                Добавить лот
+            </div>
+        </a>
+        <a href="#" th:href="@{/profile/balance}">
+            <div class="cell">
+                Пополнить баланс
+            </div>
+        </a>
+        <a href="#" th:href="@{/profile/buys}">
+            <div class="cell">
+                Мои покупки
+            </div>
+        </a>
+        <a sec:authorize="hasRole('ADMIN')" href="#" th:href="@{/admin}">
+            <div class="cell">
+                Админ
+            </div>
+        </a>
+        <a href="#" th:href="@{/logout}">
+            <div class="cell">
+                Выйти
+            </div>
+        </a>
+    </div>
+    <div th:insert="~{fragments/notification :: notification}"></div>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="../static/scripts/subLogic.js" th:href="@{../static/scripts/subLogic.js}"></script>
+    <script src="../static/scripts/listenNotification.js" th:href="@{../static/scripts/listenNotification.js}"></script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Подтверждение аккаунта</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/authStyles.css" th:href="@{../static/styles/authStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<div class="pane">
+    <div class="upper">
+        <h3>Ваш аккаунт</h3>
+    </div>
+    <div th:if="${check}">
+        Активирован
+    </div>
+    <div th:if="${check} == false">
+        Не активирован токен не валиден
+    </div>
+
+</div>
+</body>
+</html>

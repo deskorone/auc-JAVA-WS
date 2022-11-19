@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap");
+
+
+.notification {
+    background: white;
+    visibility: hidden;
+    position: fixed;
+    width: 300px;
+    height: 100px;
+    top: 110px;
+    right: 20px;
+    border-radius: 10px;
+    display: flex;
+
+    -webkit-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+}
+
+
+.adder{
+    visibility: visible;
+}
+
+.styler{
+    background: #5FD068;
+    position: relative;
+    width: 30px;
+    height: 100%;
+    border-radius: 5px 0 0 5px;
+}
+
+.notText{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-size: 20px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.but{
+    width: 17px;
+    height: 17px;
+    outline: none;
+    border-radius: 50px;
+    position: relative;
+    border: none;
+    background: #c9c6c6;
+    right: 5px;
+    top: 5px;
+    align-self: start;
+    /*transition: 0.1s;*/
+
+}
+
+.but:active{
+    filter: brightness(70%);
+}
+
+.but:hover{
+    filter: brightness(70%);
+}
+
+.texter{
+    margin: 0 0 0 10px;
+
+}
+

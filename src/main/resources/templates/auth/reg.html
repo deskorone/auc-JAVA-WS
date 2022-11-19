@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration page</title>
+    <meta charset="UTF-8">
+    <!--    <link  type="text/css" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">-->
+    <link type="text/css" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../../static/styles/authStyles.css" th:href="@{../../static/styles/authStyles.css}">
+
+</head>
+<body>
+<div class="pane">
+    <div class="upper">
+        <h3>Страница регистрации</h3>
+    </div>
+    <form th:action="@{/reg}" method="post" th:object="${regDto}" class="form">
+
+        <label for="username">Имя</label>
+        <input type="text" class="inf" id="username" name="username" autofocus="autofocus" placeholder="Имя" th:field="*{username}"> <br/>
+        <p class="error" th:if="${#fields.hasErrors('password')}" style="margin: 20px">Имя не должно быть пустым</p>
+
+        <label for="email">Почта</label>
+        <input type="text" class="inf" id="email" name="email" autofocus="autofocus" placeholder="Почта" th:field="*{email}"> <br/>
+        <p class="error" th:if="${#fields.hasErrors('email')}"  style="margin: 20px">Почта неверна</p>
+
+        <label for="password">Пароль</label>
+        <input type="password" class="inf" id="password" name="password" th:field="*{password}" placeholder="Пароль"/> <br/>
+        <p class="error" th:if="${#fields.hasErrors('password')}" style="margin: 20px">Пароль не валиден</p>
+
+        <input type="radio" value="1" id="isAdmin" th:field="*{isAdmin}" ><label for="isAdmin">Админ</label></br>
+        <input type="submit" value="Регистрация" class="btn"/>
+    </form>
+    <a th:href="@{/login}" href="#" class="reghref">Войти</a>
+</div>
+</body>
+</html>

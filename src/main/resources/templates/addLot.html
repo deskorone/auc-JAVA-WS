@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление лота</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/addStyles.css" th:href="@{../static/styles/addStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"> </div>
+<div class="pane">
+    <div class="upper">
+        Добавление лота
+    </div>
+    <div class="content-profile">
+        <div class="add-form">
+            <form th:action="@{/profile/add}"  method="post" th:object="${lotDto}" enctype="multipart/form-data">
+
+                <div class="add-error">
+                <p th:if="${#fields.hasErrors('lotName')}" style="color: red">*Имя лота обязательно</p>
+                <p th:if="${#fields.hasErrors('startPrice')}" style="color: red">*Стартовая цена не валидна</p>
+                <p th:if="${#fields.hasErrors('desc')}" style="color: red">*Описание не должно быть пустым</p>
+                <p th:if="${#fields.hasErrors('photo')}" style="color: red">*Фото обязательно для заполнения</p>
+                </div>
+                <div class="in">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" autofocus="autofocus" placeholder="Название лота" th:field="*{lotName}">
+                </div>
+                <div class="in">
+                <label for="price">Стартовая цена</label>
+                <input type="text" id="price" name="price"  placeholder="Начальная цена" th:field="*{startPrice}">
+                </div>
+                <div class="in">
+                <label for="desc">Описание</label>
+                <textarea id="desc" name="desc"  placeholder="Описание лота" th:field="*{desc}"></textarea>
+                </div>
+                <div class="in">
+                <label for="photo">Фото</label>
+                <input type="file" id="photo" name="photo" multiple="multiple" style="border: none; height: 40px;" th:field="*{photo}">
+                </div>
+                <div class="in addBut">
+                    <input type="submit" value="Добавить лот"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

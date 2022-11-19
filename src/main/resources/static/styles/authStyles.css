@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500&display=swap");
+
+*{
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.pane{
+    font-size: 20px;
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error{
+    color: red;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #5FD068;
+    height: 180px;
+    border-radius: 10px;
+    width: 1700px;
+    -webkit-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+}
+
+.form input{
+    margin: 25px;
+
+}
+
+.reghref{
+    background: #5FD068;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    top: 20px;
+    -webkit-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+}
+
+.inf{
+    outline: none;
+    width: 170px;
+    height: 25px;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.btn{
+    outline: none;
+    border: none;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+
+}

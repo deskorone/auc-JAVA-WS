@@ -1,0 +1,79 @@
+
+.navCont{
+    z-index: 1;
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-family: "Roboto Thin";
+    width:  95%;
+    background: #5FD068;
+    height:  70px;
+    display: flex;
+    font-size: 23px;
+    font-weight: normal;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 4px 8px 5px rgba(34, 60, 80, 0.2);
+
+}
+
+.profile{
+
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    position: relative;
+    right: 50px;
+    transition: 0.5s;
+}
+
+.profile:hover{
+    background: #4B8673;
+}
+
+.logo:hover{
+    background: #4B8673;
+}
+
+a, a:active, a:hover{
+    color: black;
+    text-decoration: none;
+    border: none;
+}
+
+.logo{
+    padding: 5px;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    transition: 0.5s;
+    position: relative;
+    left: 50px;
+}
+
+.finder input{
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px #4B8673 solid;
+    font-size: 15px;
+    outline: none;
+}
+
+
+.finder button{
+    border-radius: 5px;
+    border: none;
+    font-size: 17px;
+    width: 60px;
+    height: 30px;
+}
+
+
+

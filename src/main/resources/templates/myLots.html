@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои лоты</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/myLotsStyles.css" th:href="@{../static/styles/myLotsStyles.css}">
+    <link rel="stylesheet" href="../static/styles/notificationStyles.css" th:href="@{../static/styles/notificationStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"> </div>
+<div class="pane">
+    <div class="upper">
+        Мои лоты
+    </div>
+    <div class="content-mylots">
+
+    <div th:if="${lots} != null" th:each="i : ${lots}">
+        <div class="item">
+            <div class="photo">
+                <div>
+                    <img th:class="${i.getPhoto() !=0} ? images" th:src="@{/api/photo/{name} (name= ${i.getPhoto()})}" src="#">
+                </div>
+            </div>
+            <div class="info">
+                <a href="#" th:href="@{/lot/{id} (id=${i.getId()})}">
+                <div class="desc" th:text="${i.getName()}">
+                </div>
+                </a>
+                <div class="buttons" th:text="${i.getDescription()}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="pages">
+        <div th:each="i : ${pageNumbers}">
+            <a href="#" th:href="@{/profile/mylots(size=${14}, page=${i})}">
+            <div th:class="${i==currentPage} ? current" th:text="${i}"></div>
+            </a>
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <div th:insert="~{fragments/notification :: notification}"></div>
+    </div>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="../static/scripts/subLogic.js" th:href="@{../static/scripts/subLogic.js}"></script>
+    <script src="../static/scripts/listenNotification.js" th:href="@{../static/scripts/listenNotification.js}"></script>
+</div>
+
+</body>
+</html>

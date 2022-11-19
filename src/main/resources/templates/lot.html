@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${lot.getName()}">Лот</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/lotPage.css" th:href="@{../static/styles/lotPage.css}">
+    <link rel="stylesheet" href="../static/styles/notificationStyles.css" th:href="@{../static/styles/notificationStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+<div class="pane">
+    <div class="upper" th:text="'Лот ' + ${lot.name}">
+        Лот
+    </div>
+    <div class="content-lot-page">
+        <div class="lot-header">
+            <div class="lot-photo">
+                <img th:src="@{/api/photo/{name} (name= ${lot.getPhoto()})}"
+                     style="position: relative; width: 100%; height: 100%;" src="#">
+            </div>
+            <div class="lot-info">
+                <div class="lot-desc" th:text="${lot.getDescription()}">
+                </div>
+
+                <div class="lot-desc" th:text="'Начальная цена: ' + ${lot.getStartPrice()} +'  Дата создания: ' + ${lot.getDate()}">
+                    Начальная цена : 0
+                </div>
+
+                <div th:if="${lot.getLotStatus().toString() == 'ACTIVE'}" sec:authorize="hasRole('USER')"
+                     class="lot-changer">
+                    <div id="price" class="lot-price" th:text="${lot.getPrice()}">
+                    </div>
+                    <div th:if="${isMy} == false">
+                        <button id="btn" th:attr="onclick=|sendPrice(${userId})|">Повысить</button>
+                        <input type="text" id="inp">
+                    </div>
+                    <form th:if="${isMy}" th:method="POST" th:action="@{/profile/sale(id=${lot.getId()})}">
+                        <input value="Закончить торг" style="font-size: 15px; width: 160px" type="submit">
+                    </form>
+                </div>
+                <div th:if="${lot.getLotStatus().toString() == 'CLOSE'} ">
+                    <div class="lot_price" th:text=" 'Торги окончены в '  + ${lot.getTimeSale()} + ' Продан за: ' + ${lot.getPrice()}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="lot-footer">
+
+            <div class="comments" >
+                <div class="history-header">
+                    Коментарии
+                </div>
+                <div class="cells" id="comm-cells">
+                    <div class="com" th:each="j : ${comments}">
+                        <div class="com-user" th:text="${j.getUser().getName() + ':'}">
+                        </div>
+                        <div class="com-text" th:text="${j.getCommentText()}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comm-inp" sec:authorize="isAuthenticated()">
+                    <input type="text" name="comm" id="comm-inp">
+                    <button id="comm-but" class="buttons" th:onclick="|sendComment(${lot.getId()})|">Отправить</button>
+                </div>
+            </div>
+            <div class="history">
+                <div class="history-header">
+                    История торгов
+                </div>
+                <div class="cells" id="history-cells">
+                    <div class="com" th:each="j : ${trades}">
+                        <div class="com-user" th:text="${j.getUserSecurity().getName() + ':'}">
+                        </div>
+                        <div class="com-text" th:text="${j.getText()}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <div th:insert="~{fragments/notification :: notification}"></div>
+    </div>
+</div>
+<div sec:authorize="hasRole('USER') or hasRole('ADMIN')">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="../static/scripts/webSockPage.js"></script>
+    <script src="../static/scripts/commentsLogic.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Баланс</title>
+    <link rel="stylesheet" href="../static/styles/indexStyles.css" th:href="@{../static/styles/indexStyles.css}">
+    <link rel="stylesheet" href="../static/styles/navbarStyles.css" th:href="@{../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../static/styles/addStyles.css" th:href="@{../static/styles/addStyles.css}">
+    <link rel="stylesheet" href="../static/styles/notificationStyles.css" th:href="@{../static/styles/notificationStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"> </div>
+<div class="pane">
+    <div class="upper">
+        Добавление лота
+    </div>
+    <div class="content-profile">
+        <div class="add-form">
+            <div style="margin: 20px 0 0 0" th:text="'Ваш текущий баланс:  ' + ${balance}"> BALANCE</div>
+            <form th:action="@{/profile/balance}"  method="post" th:object="${balanceDto}" enctype="multipart/form-data">
+                <div class="add-error">
+                    <p th:if="${#fields.hasErrors('balance')}" style="color: red">*Введенные данные не валидны</p>
+                </div>
+                <div class="in">
+                    <label for="name">Баланс</label>
+                    <input type="text" id="name" name="name" autofocus="autofocus" placeholder="..." th:field="*{balance}">
+                </div>
+                <div class="in addBut">
+                    <input type="submit" value="Пополнить баланс"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div th:insert="~{fragments/notification :: notification}"></div>
+</div>
+
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="../static/scripts/subLogic.js" th:href="@{../static/scripts/subLogic.js}"></script>
+<script src="../static/scripts/listenNotification.js" th:href="@{../static/scripts/listenNotification.js}"></script>
+
+</body>
+</html>

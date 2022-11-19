@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/styles/navbarStyles.css"
+          th:href="@{../../static/styles/navbarStyles.css}">
+</head>
+<body>
+<div th:fragment="navbar">
+    <div class="navCont">
+        <a th:href="@{/}" href="#">
+            <div class="logo">
+                AucSale
+            </div>
+        </a>
+        <div class="finder">
+            <!--            <input th:href="@{/find}" type="text">-->
+            <div>
+                <a th:href="@{/find}" type="submit">Поиск</a>
+            </div>
+        </div>
+
+        <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile}" href="">
+            <div class="profile">
+                Профиль
+            </div>
+        </a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">
+            <div class="profile">
+                Войти
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>

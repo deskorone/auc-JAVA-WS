@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/styles/navbarStyles.css" th:href="@{../../static/styles/navbarStyles.css}">
+    <link rel="stylesheet" href="../../static/styles/authStyles.css" th:href="@{../../static/styles/authStyles.css}">
+</head>
+<body>
+<div th:insert="~{fragments/navbar :: navbar}"> </div>
+
+<div class="pane">
+    <div class="upper">
+        <h3>Авторизация</h3>
+    </div>
+    <p th:if="${error}" class="error">*Неправильный логин или пароль</p>
+    <form th:action="@{/login}" method="post" class="form">
+        <label for="username" class="col-sm-2 col-form-label" style="margin: 0 auto">Логин</label>
+        <input type="text" id="username" name="username" autofocus="autofocus" class="inf"
+               placeholder="Почта"/>
+        <label for="password" class="col-sm-2 col-form-label" style="margin: 0 auto">Пароль</label>
+        <input type="password" id="password" name="password" class="inf" placeholder="Пароль"/>
+        <input type="submit" value="Войти" class="btn"/>
+    </form>
+    <a th:href="@{/reg}" href="#" class="reghref">Регистрация</a>
+</div>
+</div>
+</body>
+</html>
